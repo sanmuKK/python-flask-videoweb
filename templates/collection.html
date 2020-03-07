@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的收藏</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+{% if collect %}
+{% for i in collect %}
+    <a href="{{url_for('see_video',kid=i.collections)}}">{{ i.collections }}</a><br>
+{% endfor %}
+{% else %}
+您还没有收藏过视频哦~
+{% endif %}
+<br><a href="{{ url_for('personal_data') }}">返回个人中心</a><br>
+</h1></div></body>
+</html>

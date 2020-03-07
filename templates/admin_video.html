@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频管理</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+{% if video %}
+{% for i in video %}
+    <a href="{{url_for('see_video',kid=i.id)}}">{{ i.id }}</a>
+    <a href="{{ url_for('delvideo',video_id=i.id) }}">删除</a> <br>
+{% endfor %}
+{% else %}
+还没有人上传视频哦<br>
+{% endif %}
+<a href="{{ url_for('admin') }}">返回后台管理界面</a> <br>
+</h1>
+</div>
+</body>
+</html>

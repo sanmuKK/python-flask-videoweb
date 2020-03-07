@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+    <a href='{{ url_for("personal_data") }}'>个人中心</a><br>
+    <a href="{{ url_for("videocenter") }}">视频中心</a><br>
+    <a href="{{ url_for("uploadvideo") }}">上传视频</a><br>
+{% if adminid=='admin' %}
+<a href="{{ url_for('admin') }}">后台管理</a><br>
+{% endif %}
+<a href='{{url_for("logout")}}'>登出</a><br>
+</h1>
+</div>
+</body>
+</html>

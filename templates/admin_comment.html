@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评论管理</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+{% if comments %}
+{% for i in comments %}
+    来自视频<a href="{{url_for('see_video',kid=i.video)}}">{{ i.video }}</a>的一条评论：<br>
+    &nbsp;&nbsp;{{ i.username }}:{{ i.comment}}
+    &nbsp;&nbsp;<a href="{{ url_for('delcomment',comment_id=i.id) }}">删除该评论</a> <br>
+{% endfor %}
+{% else %}
+还没有人发表过评论哦<br>
+{% endif %}
+<a href="{{ url_for('admin') }}">返回后台管理界面</a> <br>
+</h1>
+</div>
+</body>
+</html>

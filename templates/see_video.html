@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>视频</title>
+</head>
+<p>
+<body background="/static/icon/0000-.jpg">
+<link rel="stylesheet" href="{{ url_for('static',filename='dplayer/dist/Dplayer.min.css') }}" >
+<script src="{{ url_for('static',filename='dplayer/dist/DPlayer.min.js') }}"></script>
+<div align="center">
+<div id="dplayer" style="height: 600px;width: 900px"></div>
+<script>
+        var dp1 = new DPlayer({
+            container: document.getElementById('dplayer'),
+            video: {
+                url: "{{ video.videoaddress}}"
+            },
+            danmaku: {
+                id: '{{ video.id }}',
+                api: '/tm/'
+            }
+        });
+ </script>
+</div><br>
+已经有{{ video.thumb_up }}人点了赞
+{% if not thumb_up %}
+<a href="{{ url_for('thumb_up',kid=kid)}}">点赞</a>
+{% else %}
+<a href="{{ url_for('cancle_thumb_up',kid=kid) }}">取消点赞</a>
+{% endif %}
+{% if not collect %}
+<a href="{{ url_for('give_collection',kid=kid)}}">收藏</a>
+{% else %}
+<a href="{{ url_for('cancle_collection',kid=kid) }}">取消收藏</a>
+{% endif %}
+<style>
+        .hh { display: inline; }
+</style>
+<br><br><h3 class="hh">评论:</h3><br>
+{% if commentt %}
+{% for i in commentt %}
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ i.username }}:{{ i.comment }}<br>
+{% endfor %}
+{% else %}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个视频暂时还没有评论哦~<br>
+{% endif %}
+当前页数：{{ commenT.page }}
+总页数：{{ commenT.pages }}
+一共有{{ commenT.total }}条评论<br>
+{% if commenT.has_prev %}
+        <a href="/see_video/{{ kid }}/?page={{ commenT.prev_num }}">上一页</a>
+    {% endif %}
+    页码：
+{% for i in commenT.iter_pages() %}
+        <a href="/see_video/{{ kid }}/?page={{ i }}">{{ i }}</a>
+{% endfor %}
+
+{% if commenT.has_next %}
+    <a href="/see_video/{{ kid }}/?page={{ commenT.next_num }}">下一页</a>
+{% endif %}
+<br><a href="{{ url_for('comment',kid=video.id) }}">评论</a>
+<a href="{{ url_for('home') }}">返回主页</a>
+</body>
+</html>

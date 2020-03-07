@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>视频中心</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+<a href="{{ url_for('anime') }}">番剧</a>
+<a href="{{ url_for('otomad') }}">鬼畜</a>
+<a href="{{ url_for('film') }}">电影</a><br>
+{% if video %}
+{% for i in video %}
+    <a href="{{url_for('see_video',kid=i.id)}}">{{ i.id }}</a><br>
+{% endfor %}
+{% else %}
+这里还没有视频哦<br>
+{% endif %}
+当前页数：{{ paginate.page }}
+总页数：{{ paginate.pages }}
+一共有{{ paginate.total }}个视频<br>
+{% if paginate.has_prev %}
+        <a href="/videocenter/?page={{ paginate.prev_num }}">上一页</a>
+    {% endif %}
+    页码：
+{% for i in paginate.iter_pages() %}
+        <a href="/videocenter/?page={{ i }}">{{ i }}</a>
+{% endfor %}
+{% if paginate.has_next %}
+    <a href="/videocenter/?page={{ paginate.next_num }}">下一页</a>
+{% endif %}
+<br><a href="{{ url_for('home') }}">返回主页</a><br>
+</h1></div></body>
+</html>

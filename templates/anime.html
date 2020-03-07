@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>番剧</title>
+</head>
+<body background="/static/icon/000_.jpg">
+<div align="center">
+<h1>
+<br><br><br><br><br>
+{% if video %}
+{% for i in video %}
+    <a href="{{url_for('see_video',kid=i.id)}}">{{ i.id }}</a><br>
+{% endfor %}
+{% else %}
+这里还没有视频哦
+{% endif %}
+</h1>
+</div>
+</body>
+</html>
